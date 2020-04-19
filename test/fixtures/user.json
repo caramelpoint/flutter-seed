@@ -1,0 +1,8 @@
+{
+  "name": "Test name",
+  "username": "Test username",
+  "_id": "Test id",
+  "email": "test@test.com",
+  "createdAt": "Test createdAt",
+  "updatedAt": "Test updateAt"
+}

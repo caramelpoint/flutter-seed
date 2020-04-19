@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>760906523993-ldjfr0c4c3dv5ua2p344ikli8pik6dp6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.760906523993-ldjfr0c4c3dv5ua2p344ikli8pik6dp6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAqPmoQycWPKclEUjMtUe5NY8iT4uu39OA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>760906523993</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.caramel.seed</string>
+	<key>PROJECT_ID</key>
+	<string>caramelseed</string>
+	<key>STORAGE_BUCKET</key>
+	<string>caramelseed.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:760906523993:ios:752c103eb3a1d6efb05848</string>
+	<key>DATABASE_URL</key>
+	<string>https://caramelseed.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "760906523993",
+    "firebase_url": "https://caramelseed.firebaseio.com",
+    "project_id": "caramelseed",
+    "storage_bucket": "caramelseed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760906523993:android:fb36b4c413e2fa7ab05848",
+        "android_client_info": {
+          "package_name": "com.caramel.seed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760906523993-qt9mf4do2dgdts7ib0nl75t9janeqjbo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJEl7MJKGdWCz8l1fVrlODsclbJqTHbWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760906523993-qt9mf4do2dgdts7ib0nl75t9janeqjbo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "760906523993-ldjfr0c4c3dv5ua2p344ikli8pik6dp6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.caramel.seed"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

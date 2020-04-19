@@ -1,0 +1,50 @@
+name: caramelseed
+description: A new Flutter project.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.2.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^0.5.6
+  cupertino_icons: ^0.1.2
+  font_awesome_flutter: ^8.5.0
+  json_annotation: ^3.0.1
+  lite_rolling_switch: ^0.1.1
+  flutter_bloc: ^3.2.0
+  equatable: ^1.1.1
+  get_it: ^4.0.1
+  dartz: ^0.8.9
+  data_connection_checker: ^0.3.4
+  http: ^0.12.0+4
+  meta: ^1.1.8
+  page_transition: ^1.1.5
+  flutter_spinkit: '^4.1.2'
+  path_provider: ^1.6.5
+
+dev_dependencies:
+  flutter_driver:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  mockito: ^4.1.1
+  lint: ^1.0.0
+  test: ^1.09.0
+  git_hooks: ^0.0.1
+  build_runner: ^1.7.4
+  json_serializable: ^3.2.5
+
+flutter:
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Medium.ttf
+          style: normal
+        - asset: fonts/Roboto-MediumItalic.ttf
+          style: italic
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/json/

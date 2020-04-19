@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "_id": "5e87a2f69a72d1528f5c0070",
+      "name": "Item Name",
+      "description": "Item brief description",
+      "createdAt": "2020-04-03T20:56:22.662Z",
+      "updatedAt": "2020-04-03T20:56:22.662Z"
+    },
+    {
+      "_id": "5e87a2f69a72d1528f5c0070",
+      "name": "Another Item Name",
+      "description": "Another items brief description",
+      "createdAt": "2020-04-03T20:56:22.662Z",
+      "updatedAt": "2020-04-03T20:56:22.662Z"
+    }
+  ],
+  "meta": {
+    "top": 1000,
+    "skip": 0,
+    "inlineCount": 0
+  }
+}
