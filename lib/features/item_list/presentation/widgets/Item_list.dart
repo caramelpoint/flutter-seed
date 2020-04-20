@@ -36,29 +36,22 @@ class ItemList extends StatelessWidget {
         builder: (BuildContext context, GetAllItemsState state) {
           if (state is ItemsLoaded) {
             return Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
-                    child: Text(
-                      "Items",
-                      style: Theme.of(context).textTheme.title
-                    )
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: state.items.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ItemWidget(itemToShow: state.items[index]);
-                      }
-                    ),
-                  ),
-                ]
-              )
-            );
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: Text("Items", style: Theme.of(context).textTheme.title)),
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: state.items.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ItemWidget(itemToShow: state.items[index]);
+                            }),
+                      ),
+                    ]));
           }
           //TODO: Show empty list message
           return Container();

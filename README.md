@@ -1,16 +1,24 @@
-# caramelseed
+# Caramel Point - Flutter Seed
 
-A new Flutter project.
+**Caramel Seed** is an App that you can use as a starting point for a Flutter Application. It includes all that you need in a basic or complex mobile app.
 
-## Getting Started
+## Components
 
-This project is a starting point for a Flutter application.
+### Authorization
 
-A few resources to get you started if this is your first Flutter project:
+* **TokenManager**: Save session token on shared preferences. By default use the  authorization header. Get session token.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+* **HttpCommon**:  Build the authorization header with token.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* **Session Manager**: Session management, Check if the user is logged in.
+
+### Login
+
+Login form with custom validations:
+
+* Email format
+* Password length
+
+### Item list
+
+List using material cards.

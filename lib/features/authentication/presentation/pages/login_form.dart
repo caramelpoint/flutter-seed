@@ -5,7 +5,6 @@ import '../../../../core/config/size_config.dart';
 import '../../../../core/util/snackbar.dart';
 import '../../../../core/widgets/button.dart';
 import '../../../../core/widgets/input_field.dart';
-import '../../../../core/widgets/logo.dart';
 import '../../domain/usecases/login/bloc.dart';
 import '../../domain/usecases/user_session/bloc.dart';
 
