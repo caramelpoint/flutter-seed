@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:caramelseed/core/commons/common_error_msg.dart';
+import 'package:caramelseed/core/commons/common_messages.dart';
 import 'package:caramelseed/core/error/failures.dart';
 import 'package:caramelseed/features/authentication/data/model/user_model.dart';
 import 'package:caramelseed/features/authentication/domain/entities/user.dart';
@@ -165,7 +165,7 @@ void main() {
         skip: 0,
         expect: [
           Uninitialized(),
-          const ErrorSessionState(msg: CommonErrorMessage.CLEARING_USER_SESSION_ERROR),
+          const ErrorSessionState(msg: CommonMessage.CLEARING_USER_SESSION_ERROR),
         ],
       );
     },

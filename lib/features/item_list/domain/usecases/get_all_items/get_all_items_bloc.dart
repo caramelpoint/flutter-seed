@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../core/commons/common_error_msg.dart';
+import '../../../../../core/commons/common_messages.dart';
 import '../../../../../core/error/failures.dart';
 import '../../entities/item.dart';
 import '../../repositories/item_repository.dart';
@@ -31,7 +31,7 @@ class GetAllItemsBloc extends Bloc<GetAllItemsEvent, GetAllItemsState> {
     String email,
     String password,
   }) async* {
-    yield const GettingItems(msg: CommonErrorMessage.GETTING_ITEMS);
+    yield const GettingItems(msg: CommonMessage.GETTING_ITEMS);
     final Either<Failure, List<Item>> failureOrUser = await repository.getAll();
     yield failureOrUser.fold(
       (failure) => ErrorGettingItems(msg: _mapFailureToMessage(failure)),
@@ -44,9 +44,9 @@ class GetAllItemsBloc extends Bloc<GetAllItemsEvent, GetAllItemsState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case NoConnectionFailure:
-        return CommonErrorMessage.NO_CONNECTION_FAILURE_MESSAGE;
+        return CommonMessage.NO_CONNECTION_FAILURE_MESSAGE;
       case GetAllItemsFailure:
-        return CommonErrorMessage.GETTING_ITEMS_ERROR;
+        return CommonMessage.GETTING_ITEMS_ERROR;
       default:
         return 'Unexpected error';
     }

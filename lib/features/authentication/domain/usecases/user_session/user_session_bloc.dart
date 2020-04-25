@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../core/commons/common_error_msg.dart';
+import '../../../../../core/commons/common_messages.dart';
 import '../../../../../core/error/failures.dart';
 import '../../entities/user.dart';
 import '../../repositories/user_session_repository.dart';
@@ -54,7 +54,7 @@ class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
   Stream<UserSessionState> _mapLoggedOutToState() async* {
     final Either<Failure, void> failureOrSuccess = await userSessionRepository.removeUserLogged();
     yield failureOrSuccess.fold(
-      (failure) => const ErrorSessionState(msg: CommonErrorMessage.CLEARING_USER_SESSION_ERROR),
+      (failure) => const ErrorSessionState(msg: CommonMessage.CLEARING_USER_SESSION_ERROR),
       (_) => Unauthenticated(),
     );
   }

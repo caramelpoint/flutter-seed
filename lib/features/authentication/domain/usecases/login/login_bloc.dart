@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:caramelseed/core/commons/common_messages.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../core/commons/common_error_msg.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/util/validators.dart';
 import '../../entities/user.dart';
@@ -42,7 +42,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginInvalidValuesToState(String email, String password) async* {
     yield LoginInvalidValuesState(
-      msg: CommonErrorMessage.LOGIN_UNCOMPLETED_FIELDS,
+      msg: CommonMessage.LOGIN_UNCOMPLETED_FIELDS,
       emailValid: Validators.isValidEmail(email),
       passwordValid: Validators.isValidPassword(password),
     );
@@ -64,17 +64,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     String email,
     String password,
   }) async* {
-    yield const AuthenticatingState(msg: CommonErrorMessage.AUTHENTICATING_MESSAGE);
+    yield const AuthenticatingState(msg: CommonMessage.AUTHENTICATING_MESSAGE);
     final Either<Failure, User> failureOrUser = await authRepository.login(Params(email: email, password: password));
     yield* failureOrUser.fold(
       (failure) async* {
         yield ErrorLoginState(msg: _mapFailureToMessage(failure));
       },
       (user) async* {
-        yield const TransitionState(msg: CommonErrorMessage.SAVING_USER_SESSION);
+        yield const TransitionState(msg: CommonMessage.SAVING_USER_SESSION);
         final Either<Failure, void> saveUserLoggedFailureOrSuccess = await userSessionRepository.saveUserLogged(user);
         yield saveUserLoggedFailureOrSuccess.fold(
-          (failure) => const ErrorLoginState(msg: CommonErrorMessage.SAVING_USER_SESSION_ERROR),
+          (failure) => const ErrorLoginState(msg: CommonMessage.SAVING_USER_SESSION_ERROR),
           (_) => AuthorizedState(user),
         );
       },
@@ -84,9 +84,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case NoConnectionFailure:
-        return CommonErrorMessage.NO_CONNECTION_FAILURE_MESSAGE;
+        return CommonMessage.NO_CONNECTION_FAILURE_MESSAGE;
       case LoginFailure:
-        return CommonErrorMessage.LOGIN_FAILURE_MESSAGE;
+        return CommonMessage.LOGIN_FAILURE_MESSAGE;
       default:
         return 'Unexpected error';
     }

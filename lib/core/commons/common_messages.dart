@@ -1,4 +1,4 @@
-class CommonErrorMessage {
+class CommonMessage {
   static const String LOGIN_FAILURE_MESSAGE = 'Email o Contraseña incorrecta!';
   static const String LOGIN_UNCOMPLETED_FIELDS = 'Complete los datos!';
   static const String NO_CONNECTION_FAILURE_MESSAGE = 'Dispositivo sin conexión a internet!';

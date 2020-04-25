@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:caramelseed/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:dartz/dartz.dart';
-import 'package:caramelseed/core/commons/common_error_msg.dart';
+import 'package:caramelseed/core/commons/common_messages.dart';
 import 'package:caramelseed/core/error/failures.dart';
 import 'package:caramelseed/features/authentication/data/model/user_model.dart';
 import 'package:caramelseed/features/authentication/domain/entities/user.dart';
@@ -76,8 +76,8 @@ void main() {
           // assert later
           final expected = [
             const InitialLoginState(),
-            const AuthenticatingState(msg: CommonErrorMessage.AUTHENTICATING_MESSAGE),
-            const TransitionState(msg: CommonErrorMessage.SAVING_USER_SESSION),
+            const AuthenticatingState(msg: CommonMessage.AUTHENTICATING_MESSAGE),
+            const TransitionState(msg: CommonMessage.SAVING_USER_SESSION),
             AuthorizedState(user),
           ];
           expectLater(bloc, emitsInOrder(expected));
@@ -95,8 +95,8 @@ void main() {
           // assert later
           final expected = [
             const InitialLoginState(),
-            const AuthenticatingState(msg: CommonErrorMessage.AUTHENTICATING_MESSAGE),
-            const ErrorLoginState(msg: CommonErrorMessage.NO_CONNECTION_FAILURE_MESSAGE),
+            const AuthenticatingState(msg: CommonMessage.AUTHENTICATING_MESSAGE),
+            const ErrorLoginState(msg: CommonMessage.NO_CONNECTION_FAILURE_MESSAGE),
           ];
           expectLater(bloc, emitsInOrder(expected));
           // act
@@ -113,8 +113,8 @@ void main() {
           // assert later
           final expected = [
             const InitialLoginState(),
-            const AuthenticatingState(msg: CommonErrorMessage.AUTHENTICATING_MESSAGE),
-            const ErrorLoginState(msg: CommonErrorMessage.LOGIN_FAILURE_MESSAGE),
+            const AuthenticatingState(msg: CommonMessage.AUTHENTICATING_MESSAGE),
+            const ErrorLoginState(msg: CommonMessage.LOGIN_FAILURE_MESSAGE),
           ];
           expectLater(bloc, emitsInOrder(expected));
           // act
@@ -132,9 +132,9 @@ void main() {
           // act
           final expected = [
             const InitialLoginState(),
-            const AuthenticatingState(msg: CommonErrorMessage.AUTHENTICATING_MESSAGE),
-            const TransitionState(msg: CommonErrorMessage.SAVING_USER_SESSION),
-            const ErrorLoginState(msg: CommonErrorMessage.SAVING_USER_SESSION_ERROR),
+            const AuthenticatingState(msg: CommonMessage.AUTHENTICATING_MESSAGE),
+            const TransitionState(msg: CommonMessage.SAVING_USER_SESSION),
+            const ErrorLoginState(msg: CommonMessage.SAVING_USER_SESSION_ERROR),
           ];
           expectLater(bloc, emitsInOrder(expected));
           // assert
@@ -245,7 +245,7 @@ void main() {
             const LoginInvalidValuesState(
               emailValid: false,
               passwordValid: false,
-              msg: CommonErrorMessage.LOGIN_UNCOMPLETED_FIELDS,
+              msg: CommonMessage.LOGIN_UNCOMPLETED_FIELDS,
             ),
           ];
           expectLater(bloc, emitsInOrder(expected));
@@ -262,7 +262,7 @@ void main() {
             const LoginInvalidValuesState(
               emailValid: true,
               passwordValid: false,
-              msg: CommonErrorMessage.LOGIN_UNCOMPLETED_FIELDS,
+              msg: CommonMessage.LOGIN_UNCOMPLETED_FIELDS,
             ),
           ];
           expectLater(bloc, emitsInOrder(expected));
@@ -279,7 +279,7 @@ void main() {
             const LoginInvalidValuesState(
               emailValid: false,
               passwordValid: true,
-              msg: CommonErrorMessage.LOGIN_UNCOMPLETED_FIELDS,
+              msg: CommonMessage.LOGIN_UNCOMPLETED_FIELDS,
             ),
           ];
           expectLater(bloc, emitsInOrder(expected));
@@ -296,7 +296,7 @@ void main() {
             const LoginInvalidValuesState(
               emailValid: true,
               passwordValid: true,
-              msg: CommonErrorMessage.LOGIN_UNCOMPLETED_FIELDS,
+              msg: CommonMessage.LOGIN_UNCOMPLETED_FIELDS,
             ),
           ];
           expectLater(bloc, emitsInOrder(expected));
