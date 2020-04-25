@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:caramelseed/core/authorization/token_manager.dart';
+import 'package:caramelseed/core/managers/token_manager.dart';
 import 'package:caramelseed/core/config/env_config.dart';
 import 'package:caramelseed/core/error/exceptions.dart';
 import 'package:caramelseed/features/authentication/data/datasources/user_remote_data_source.dart';

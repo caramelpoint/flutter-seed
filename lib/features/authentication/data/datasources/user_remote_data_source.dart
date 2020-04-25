@@ -3,11 +3,9 @@
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
-import '../../../../core/authorization/token_manager.dart';
-// import '../../../../core/commons/common_endpoints.dart';
-// import '../../../../core/commons/common_http.dart';
 import '../../../../core/config/env_config.dart';
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/managers/token_manager.dart';
 import '../../domain/entities/user.dart';
 // import '../model/user_model.dart';
 

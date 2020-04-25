@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
-import '../../../../core/authorization/token_manager.dart';
 import '../../../../core/commons/common_response.dart';
 import '../../../../core/config/env_config.dart';
+import '../../../../core/managers/token_manager.dart';
 import '../../../../core/util/fixture_reader.dart';
 import '../../domain/entities/item.dart';
 import '../model/item_model.dart';
