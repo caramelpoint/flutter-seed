@@ -33,6 +33,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<User> login({String email, String password}) async {
+    await Future.delayed(const Duration(seconds: 3));
     return Future.value(
         const User(email: 'MockUser@test.com', name: 'mock', lastname: 'lastname', username: 'mockuser'));
     // final String body = jsonEncode(_getUserMap(email: email, password: password));
