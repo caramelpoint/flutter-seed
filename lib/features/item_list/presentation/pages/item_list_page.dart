@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/config/size_config.dart';
+import '../../../../core/widgets/sidebar/sidebar.dart';
 import '../../../../injection_container.dart';
 import '../../domain/usecases/get_all_items/bloc.dart';
 import '../widgets/item_list.dart';
@@ -21,9 +22,7 @@ class ItemListPage extends StatelessWidget {
           color: theme.colorScheme.secondary,
         ),
       ),
-      drawer: Drawer(
-        child: Container()
-      ),
+      drawer: const Sidebar(),
       body: Center(
         child: BlocProvider<GetAllItemsBloc>(
           create: (BuildContext context) => injector<GetAllItemsBloc>()..add(const GetAllItems()),
