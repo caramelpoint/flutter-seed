@@ -40,6 +40,18 @@ class InitialLoginState extends LoginState {
   String toString() => 'InitialLoginState { isEmailValid: $isEmailValid, isPasswordValid: $isPasswordValid }';
 }
 
+class TransitionState extends LoginState implements LoadingState {
+  final String msg;
+
+  const TransitionState({@required this.msg});
+
+  @override
+  String get message => msg;
+
+  @override
+  String toString() => 'TransitionState { msg: $msg }';
+}
+
 class AuthenticatingState extends LoginState implements LoadingState {
   const AuthenticatingState({@required this.msg}) : super(isEmailValid: true, isPasswordValid: true);
 

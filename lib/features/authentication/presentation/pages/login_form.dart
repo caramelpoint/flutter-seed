@@ -5,6 +5,7 @@ import '../../../../core/config/size_config.dart';
 import '../../../../core/util/snackbar.dart';
 import '../../../../core/widgets/button.dart';
 import '../../../../core/widgets/input_field.dart';
+import '../../../../core/widgets/logo.dart';
 import '../../domain/usecases/login/bloc.dart';
 import '../../domain/usecases/user_session/bloc.dart';
 
@@ -68,49 +69,45 @@ class _LoginFormState extends State<LoginForm> {
         builder: (BuildContext context, LoginState state) {
           return Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Center(
-              child: Form(
-                child: ListView(
-                  children: <Widget>[
-                    SizedBox(height: SizeConfig.safeBlockVertical * 30),
-                    // const Logo(),
-                    InputField(
-                      controller: _emailController,
-                      icon: Icons.alternate_email,
-                      key: const Key('Email'),
-                      fieldLabel: 'Email',
-                      fieldName: 'Email',
-                      textInputType: TextInputType.emailAddress,
-                      activeColor: Theme.of(context).accentColor,
-                      hidden: false,
-                      validatorFn: (_) {
-                        return !state.isEmailValid ? 'Email Inválido' : null;
-                      },
-                    ),
-                    InputField(
-                      controller: _passwordController,
-                      icon: Icons.lock_outline,
-                      key: const Key('Password'),
-                      fieldLabel: 'Contraseña',
-                      fieldName: 'Password',
-                      textInputType: TextInputType.text,
-                      activeColor: Theme.of(context).accentColor,
-                      hidden: true,
-                      validatorFn: (_) {
-                        return !state.isPasswordValid ? 'Contraseña Incorrecta, al menos 6 caractéres.' : null;
-                      },
-                    ),
-                    SizedBox(height: SizeConfig.safeBlockVertical * 5),
-                    Button(
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      textColor: Theme.of(context).backgroundColor,
-                      text: 'Ingresar',
-                      onPressed: () {
-                        _onSubmitClick(isFormValid: state.isEmailValid && state.isPasswordValid);
-                      },
-                    ),
-                  ],
-                ),
+            child: Form(
+              child: ListView(
+                children: <Widget>[
+                  SizedBox(height: SizeConfig.safeBlockVertical * 5),
+                  const Logo(),
+                  InputField(
+                    controller: _emailController,
+                    icon: Icons.alternate_email,
+                    key: const Key('Email'),
+                    fieldLabel: 'Email',
+                    fieldName: 'Email',
+                    textInputType: TextInputType.emailAddress,
+                    hidden: false,
+                    validatorFn: (_) {
+                      return !state.isEmailValid ? 'Email Inválido' : null;
+                    },
+                  ),
+                  InputField(
+                    controller: _passwordController,
+                    icon: Icons.lock_outline,
+                    key: const Key('Password'),
+                    fieldLabel: 'Contraseña',
+                    fieldName: 'Password',
+                    textInputType: TextInputType.text,
+                    hidden: true,
+                    validatorFn: (_) {
+                      return !state.isPasswordValid ? 'Contraseña Incorrecta, al menos 6 caractéres.' : null;
+                    },
+                  ),
+                  SizedBox(height: SizeConfig.safeBlockVertical * 10),
+                  Button(
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    textColor: Theme.of(context).backgroundColor,
+                    text: 'Ingresar',
+                    onPressed: () {
+                      _onSubmitClick(isFormValid: state.isEmailValid && state.isPasswordValid);
+                    },
+                  ),
+                ],
               ),
             ),
           );

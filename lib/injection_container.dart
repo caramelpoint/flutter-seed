@@ -31,7 +31,6 @@ Future<void> init() async {
   );
   injector.registerFactory(
     () => UserSessionBloc(
-      authRepository: injector<AuthRepository>(),
       userSessionRepository: injector<UserSessionRepository>(),
     ),
   );

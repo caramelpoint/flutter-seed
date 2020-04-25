@@ -10,6 +10,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
   return UserModel(
     userId: json['_id'] as String,
     name: json['name'] as String,
+    lastname: json['lastname'] as String,
     username: json['username'] as String,
     email: json['email'] as String,
     createdAt: json['createdAt'] as String,
@@ -27,6 +28,7 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) {
   }
 
   writeNotNull('name', instance.name);
+  writeNotNull('lastname', instance.lastname);
   writeNotNull('username', instance.username);
   writeNotNull('email', instance.email);
   writeNotNull('createdAt', instance.createdAt);

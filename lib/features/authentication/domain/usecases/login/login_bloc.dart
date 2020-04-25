@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
-import 'package:rxdart/rxdart.dart';
 
 import '../../../../../core/commons/common_error_msg.dart';
 import '../../../../../core/error/failures.dart';
@@ -24,24 +23,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   LoginState get initialState => const InitialLoginState();
-
-  @override
-  Stream<LoginState> transformEvents(
-    Stream<LoginEvent> events,
-    Stream<LoginState> Function(LoginEvent event) next,
-  ) {
-    final Stream<LoginEvent> nonDebounceStream = events.where((LoginEvent event) {
-      return event is! EmailChanged && event is! PasswordChanged;
-    });
-    final Stream<LoginEvent> debounceStream = events.where((LoginEvent event) {
-      return event is EmailChanged || event is PasswordChanged;
-    }).debounceTime(const Duration(milliseconds: 300));
-
-    return super.transformEvents(
-      nonDebounceStream.mergeWith(<Stream<LoginEvent>>[debounceStream]),
-      next,
-    );
-  }
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
@@ -85,11 +66,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }) async* {
     yield const AuthenticatingState(msg: CommonErrorMessage.AUTHENTICATING_MESSAGE);
     final Either<Failure, User> failureOrUser = await authRepository.login(Params(email: email, password: password));
-    yield failureOrUser.fold(
-      (failure) => ErrorLoginState(msg: _mapFailureToMessage(failure)),
-      (user) {
-        userSessionRepository.saveUserLogged(user);
-        return AuthorizedState(user);
+    yield* failureOrUser.fold(
+      (failure) async* {
+        yield ErrorLoginState(msg: _mapFailureToMessage(failure));
+      },
+      (user) async* {
+        yield const TransitionState(msg: CommonErrorMessage.SAVING_USER_SESSION);
+        final Either<Failure, void> saveUserLoggedFailureOrSuccess = await userSessionRepository.saveUserLogged(user);
+        yield saveUserLoggedFailureOrSuccess.fold(
+          (failure) => const ErrorLoginState(msg: CommonErrorMessage.SAVING_USER_SESSION_ERROR),
+          (_) => AuthorizedState(user),
+        );
       },
     );
   }

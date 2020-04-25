@@ -9,6 +9,10 @@ class LoginFailure extends Failure {}
 
 class GetCurrentSessionFailure extends Failure {}
 
+class CouldNotRemoveUserFailure extends Failure {}
+
+class CouldNotSaveUserFailure extends Failure {}
+
 class ServerFailure extends Failure {}
 
 class CacheFailure extends Failure {}

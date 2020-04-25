@@ -5,4 +5,7 @@ class CommonErrorMessage {
   static const String GETTING_ITEMS_ERROR = 'Ocurrió un error al cargar los items.';
   static const String AUTHENTICATING_MESSAGE = 'Validando Información!';
   static const String GETTING_ITEMS = 'Cargando items!';
+  static const String SAVING_USER_SESSION = 'Guardando sesion de usuario!';
+  static const String SAVING_USER_SESSION_ERROR = 'Ocurrio un error al guardar el usuario!';
+  static const String CLEARING_USER_SESSION_ERROR = 'Ocurrio un error al quitar el usuario!';
 }

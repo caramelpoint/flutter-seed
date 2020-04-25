@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:caramelseed/core/error/exceptions.dart';
 import 'package:caramelseed/core/error/failures.dart';
 import 'package:caramelseed/core/network/network_info.dart';
@@ -7,6 +6,7 @@ import 'package:caramelseed/features/authentication/data/model/user_model.dart';
 import 'package:caramelseed/features/authentication/data/repositories/auth_repository_impl.dart';
 import 'package:caramelseed/features/authentication/domain/entities/user.dart';
 import 'package:caramelseed/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 

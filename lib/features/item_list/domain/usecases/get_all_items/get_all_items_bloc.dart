@@ -31,7 +31,7 @@ class GetAllItemsBloc extends Bloc<GetAllItemsEvent, GetAllItemsState> {
     String email,
     String password,
   }) async* {
-    yield GettingItems(msg: CommonErrorMessage.GETTING_ITEMS);
+    yield const GettingItems(msg: CommonErrorMessage.GETTING_ITEMS);
     final Either<Failure, List<Item>> failureOrUser = await repository.getAll();
     yield failureOrUser.fold(
       (failure) => ErrorGettingItems(msg: _mapFailureToMessage(failure)),

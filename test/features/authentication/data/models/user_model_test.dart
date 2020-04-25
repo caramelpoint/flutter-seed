@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter_test/flutter_test.dart';
 import 'package:caramelseed/features/authentication/data/model/user_model.dart';
 import 'package:caramelseed/features/authentication/domain/entities/user.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 
@@ -10,6 +10,7 @@ void main() {
   const tUserModel = UserModel(
     userId: 'Test id',
     name: 'Test name',
+    lastname: 'Test lastname',
     email: 'test@test.com',
     username: 'Test username',
     createdAt: "Test createdAt",
@@ -48,6 +49,7 @@ void main() {
         final expectedMap = {
           "name": "Test name",
           "username": "Test username",
+          "lastname": "Test lastname",
           "_id": "Test id",
           "email": "test@test.com",
           "createdAt": "Test createdAt",

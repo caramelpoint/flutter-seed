@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:caramelseed/core/commons/common_error_msg.dart';
 import 'package:caramelseed/core/error/failures.dart';
 import 'package:caramelseed/features/authentication/data/model/user_model.dart';
 import 'package:caramelseed/features/authentication/domain/entities/user.dart';
@@ -18,14 +20,11 @@ class MockUserSessionRepository extends Mock implements UserSessionRepository {}
 
 void main() {
   UserSessionBloc bloc;
-  MockAuthRepository mockAuthRepository;
   MockUserSessionRepository mockUserSessionRepository;
 
   setUp(() {
-    mockAuthRepository = MockAuthRepository();
     mockUserSessionRepository = MockUserSessionRepository();
     bloc = UserSessionBloc(
-      authRepository: mockAuthRepository,
       userSessionRepository: mockUserSessionRepository,
     );
   });
@@ -42,42 +41,38 @@ void main() {
   group(
     'App Started',
     () {
-      test(
+      blocTest(
         'should get logged user when the app is started',
-        () async {
-          // arrange
+        build: () async {
           when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Right(user));
-          // act
-          bloc.add(AppStarted());
-          await untilCalled(mockUserSessionRepository.getUserLogged());
-          // assert
+          return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
+        },
+        act: (bloc) => bloc.add(AppStarted()) as Future<void>,
+        skip: 0,
+        verify: (_) async {
           verify(mockUserSessionRepository.getUserLogged());
         },
       );
-      test(
-        'should emit [Uninitialized, Authenticated] when data is gotten successfully',
-        () async {
-          // arrange
-          when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Right(user));
-          // assert later
-          final expected = [Uninitialized(), Authenticated(user)];
-          expectLater(bloc, emitsInOrder(expected));
-          // act
-          bloc.add(AppStarted());
-        },
-      );
 
-      test(
-        'should emit [Uninitialized, Unauthenticated] when data is not gotten successfully',
-        () async {
-          // arrange
-          when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Left(GetCurrentSessionFailure()));
-          // assert later
-          final expected = [Uninitialized(), Unauthenticated()];
-          expectLater(bloc, emitsInOrder(expected));
-          // act
-          bloc.add(AppStarted());
+      blocTest(
+        'should emit [Uninitialized, Authenticated] when data is gotten successfully',
+        build: () async {
+          when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Right(user));
+          return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
         },
+        act: (bloc) => bloc.add(AppStarted()) as Future<void>,
+        skip: 0,
+        expect: [Uninitialized(), Authenticated(user)],
+      );
+      blocTest(
+        'should emit [Uninitialized, Unauthenticated] when data is not gotten successfully',
+        build: () async {
+          when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Left(GetCurrentSessionFailure()));
+          return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
+        },
+        act: (bloc) => bloc.add(AppStarted()) as Future<void>,
+        skip: 0,
+        expect: [Uninitialized(), Unauthenticated()],
       );
     },
   );
@@ -85,42 +80,93 @@ void main() {
   group(
     'LoggedIn',
     () {
-      test(
-        'should get logged user when the app is started',
-        () async {
-          // arrange
-          when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Right(user));
-          // act
-          bloc.add(LoggedIn());
-          await untilCalled(mockUserSessionRepository.getUserLogged());
-          // assert
-          verify(mockUserSessionRepository.getUserLogged());
-        },
-      );
-      test(
+      blocTest('should get logged user when the app is started',
+          build: () async {
+            when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Right(user));
+            return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
+          },
+          act: (bloc) => bloc.add(LoggedIn()) as Future<void>,
+          skip: 0,
+          verify: (_) async {
+            verify(mockUserSessionRepository.getUserLogged());
+          });
+
+      blocTest(
         'should emit [Uninitialized, Authenticated] when data is gotten successfully',
+        build: () async {
+          when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Right(user));
+          return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
+        },
+        act: (bloc) => bloc.add(LoggedIn()) as Future<void>,
+        skip: 0,
+        expect: [Uninitialized(), Authenticated(user)],
+      );
+
+      blocTest(
+        'should emit [Uninitialized, Unauthenticated] when data is not gotten successfully',
+        build: () async {
+          when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Left(GetCurrentSessionFailure()));
+          return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
+        },
+        act: (bloc) => bloc.add(LoggedIn()) as Future<void>,
+        skip: 0,
+        expect: [Uninitialized(), Unauthenticated()],
+      );
+    },
+  );
+
+  group(
+    'LoggedOut',
+    () {
+      test(
+        'should remove user Logged correctly from shared preferences (old)',
         () async {
           // arrange
-          when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Right(user));
-          // assert later
-          final expected = [Uninitialized(), Authenticated(user)];
-          expectLater(bloc, emitsInOrder(expected));
+          when(mockUserSessionRepository.removeUserLogged()).thenAnswer((_) async => Right(null));
           // act
-          bloc.add(LoggedIn());
+          bloc.add(LoggedOut());
+          await untilCalled(mockUserSessionRepository.removeUserLogged());
+          // assert
+          verify(mockUserSessionRepository.removeUserLogged());
         },
       );
 
-      test(
-        'should emit [Uninitialized, Unauthenticated] when data is not gotten successfully',
-        () async {
-          // arrange
-          when(mockUserSessionRepository.getUserLogged()).thenAnswer((_) async => Left(GetCurrentSessionFailure()));
-          // assert later
-          final expected = [Uninitialized(), Unauthenticated()];
-          expectLater(bloc, emitsInOrder(expected));
-          // act
-          bloc.add(LoggedIn());
+      blocTest('should remove user Logged correctly from shared preferences',
+          build: () async {
+            when(mockUserSessionRepository.removeUserLogged()).thenAnswer((_) async => Right(null));
+            return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
+          },
+          act: (bloc) => bloc.add(LoggedOut()) as Future<void>,
+          skip: 0,
+          verify: (_) async {
+            verify(mockUserSessionRepository.removeUserLogged());
+          });
+
+      blocTest(
+        'should emit [Uninitialized, Unauthenticated] when LoggedOut event triggered',
+        build: () async {
+          when(mockUserSessionRepository.removeUserLogged()).thenAnswer((_) async => Right(null));
+          return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
         },
+        act: (bloc) => bloc.add(LoggedOut()) as Future<void>,
+        skip: 0,
+        expect: [
+          Uninitialized(),
+          Unauthenticated(),
+        ],
+      );
+      blocTest(
+        'should emit [Uninitialized, LogoutError] when LoggedOut event triggered',
+        build: () async {
+          when(mockUserSessionRepository.removeUserLogged()).thenAnswer((_) async => Left(CouldNotRemoveUserFailure()));
+          return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
+        },
+        act: (bloc) => bloc.add(LoggedOut()) as Future<void>,
+        skip: 0,
+        expect: [
+          Uninitialized(),
+          const ErrorSessionState(msg: CommonErrorMessage.CLEARING_USER_SESSION_ERROR),
+        ],
       );
     },
   );
