@@ -77,7 +77,7 @@ void main() {
           // act
           final result = await userSessionRepository.removeUserLogged();
           // assert
-          expect(result, Right(null));
+          expect(result, const Right(null));
         },
       );
 
@@ -119,7 +119,7 @@ void main() {
           // act
           final result = await userSessionRepository.saveUserLogged(userModel);
           // assert
-          expect(result, Right(null));
+          expect(result, const Right(null));
         },
       );
 

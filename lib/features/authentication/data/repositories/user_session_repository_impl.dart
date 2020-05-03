@@ -32,7 +32,7 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
   Future<Either<Failure, void>> removeUserLogged() async {
     final bool isUserRemoved = await sharedPreferences.remove(LOGGED_USER);
     if (isUserRemoved) {
-      return Right(null);
+      return const Right(null);
     } else {
       return Left(CouldNotRemoveUserFailure());
     }
@@ -51,7 +51,7 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
     );
     final bool isUserSaved = await sharedPreferences.setString(LOGGED_USER, jsonEncode(userModel.toJson()));
     if (isUserSaved) {
-      return Right(null);
+      return const Right(null);
     } else {
       return Left(CouldNotSaveUserFailure());
     }

@@ -51,7 +51,7 @@ void main() {
         build: () async {
           when(mockAuthRepository.login(const Params(email: email, password: password)))
               .thenAnswer((_) async => Right(user));
-          when(mockUserSessionRepository.saveUserLogged(any)).thenAnswer((_) async => Right(null));
+          when(mockUserSessionRepository.saveUserLogged(any)).thenAnswer((_) async => const Right(null));
           return LoginBloc(
             authRepository: mockAuthRepository,
             userSessionRepository: mockUserSessionRepository,
@@ -72,7 +72,7 @@ void main() {
           // arrange
           when(mockAuthRepository.login(const Params(email: email, password: password)))
               .thenAnswer((_) async => Right(user));
-          when(mockUserSessionRepository.saveUserLogged(any)).thenAnswer((_) async => Right(null));
+          when(mockUserSessionRepository.saveUserLogged(any)).thenAnswer((_) async => const Right(null));
           // assert later
           final expected = [
             const InitialLoginState(),

@@ -122,7 +122,7 @@ void main() {
         'should remove user Logged correctly from shared preferences (old)',
         () async {
           // arrange
-          when(mockUserSessionRepository.removeUserLogged()).thenAnswer((_) async => Right(null));
+          when(mockUserSessionRepository.removeUserLogged()).thenAnswer((_) async => const Right(null));
           // act
           bloc.add(LoggedOut());
           await untilCalled(mockUserSessionRepository.removeUserLogged());
@@ -133,7 +133,7 @@ void main() {
 
       blocTest('should remove user Logged correctly from shared preferences',
           build: () async {
-            when(mockUserSessionRepository.removeUserLogged()).thenAnswer((_) async => Right(null));
+            when(mockUserSessionRepository.removeUserLogged()).thenAnswer((_) async => const Right(null));
             return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
           },
           act: (bloc) => bloc.add(LoggedOut()) as Future<void>,
@@ -145,7 +145,7 @@ void main() {
       blocTest(
         'should emit [Uninitialized, Unauthenticated] when LoggedOut event triggered',
         build: () async {
-          when(mockUserSessionRepository.removeUserLogged()).thenAnswer((_) async => Right(null));
+          when(mockUserSessionRepository.removeUserLogged()).thenAnswer((_) async => const Right(null));
           return UserSessionBloc(userSessionRepository: mockUserSessionRepository);
         },
         act: (bloc) => bloc.add(LoggedOut()) as Future<void>,
