@@ -8,6 +8,7 @@ class UserModel extends User {
   const UserModel({
     this.userId,
     String name,
+    String lastname,
     String username,
     String email,
     String createdAt,
@@ -16,6 +17,7 @@ class UserModel extends User {
           username: username,
           email: email,
           name: name,
+          lastname: lastname,
           id: userId,
           createdAt: createdAt,
           updatedAt: updatedAt,

@@ -3,8 +3,8 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'core/authorization/token_manager.dart';
 import 'core/config/env_config.dart';
+import 'core/managers/token_manager.dart';
 import 'core/network/network_info.dart';
 import 'features/authentication/data/datasources/user_remote_data_source.dart';
 import 'features/authentication/data/repositories/auth_repository_impl.dart';
@@ -31,7 +31,6 @@ Future<void> init() async {
   );
   injector.registerFactory(
     () => UserSessionBloc(
-      authRepository: injector<AuthRepository>(),
       userSessionRepository: injector<UserSessionRepository>(),
     ),
   );

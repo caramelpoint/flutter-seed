@@ -1,5 +1,6 @@
 {
   "name": "Test name",
+  "lastname": "Test lastname",
   "username": "Test username",
   "_id": "Test id",
   "email": "test@test.com",

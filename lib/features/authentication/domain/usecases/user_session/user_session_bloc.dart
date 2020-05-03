@@ -1,19 +1,19 @@
 import 'dart:async';
+
+import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
-import 'package:bloc/bloc.dart';
+
+import '../../../../../core/commons/common_messages.dart';
 import '../../../../../core/error/failures.dart';
 import '../../entities/user.dart';
-import '../../repositories/auth_repository.dart';
 import '../../repositories/user_session_repository.dart';
 import 'bloc.dart';
 
 class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
-  final AuthRepository authRepository;
   final UserSessionRepository userSessionRepository;
 
   UserSessionBloc({
-    @required this.authRepository,
     @required this.userSessionRepository,
   });
 
@@ -26,10 +26,9 @@ class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
       yield* _mapAppStartedToState();
     } else if (event is LoggedIn) {
       yield* _mapLoggedInToState();
+    } else if (event is LoggedOut) {
+      yield* _mapLoggedOutToState();
     }
-    // else if (event is LoggedOut) {
-    //   yield* _mapLoggedOutToState();
-    // }
   }
 
   Stream<UserSessionState> _mapAppStartedToState() async* {
@@ -52,8 +51,11 @@ class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
     );
   }
 
-  // Stream<UserSessionState> _mapLoggedOutToState() async* {
-  //   yield Unauthenticated();
-  //   _userRepository.signOut();
-  // }
+  Stream<UserSessionState> _mapLoggedOutToState() async* {
+    final Either<Failure, void> failureOrSuccess = await userSessionRepository.removeUserLogged();
+    yield failureOrSuccess.fold(
+      (failure) => const ErrorSessionState(msg: CommonMessage.CLEARING_USER_SESSION_ERROR),
+      (_) => Unauthenticated(),
+    );
+  }
 }

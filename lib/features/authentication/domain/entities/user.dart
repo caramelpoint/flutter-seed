@@ -21,4 +21,8 @@ class User extends Equatable {
 
   @override
   List<Object> get props => [username, email, name, lastname, createdAt, updatedAt, id];
+
+  String getUserFullName() {
+    return '$name $lastname';
+  }
 }

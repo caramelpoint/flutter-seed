@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../../../core/commons/common_state.dart';
 import '../../../domain/entities/user.dart';
 
 abstract class UserSessionState extends Equatable {
@@ -26,3 +27,18 @@ class Authenticated extends UserSessionState {
 class Uninitialized extends UserSessionState {}
 
 class Unauthenticated extends UserSessionState {}
+
+class ErrorSessionState extends UserSessionState implements ErrorState {
+  final String msg;
+
+  const ErrorSessionState({this.msg});
+
+  @override
+  String toString() => 'ErrorSessionState { message: $message }';
+
+  @override
+  List<Object> get props => [message];
+
+  @override
+  String get message => msg;
+}

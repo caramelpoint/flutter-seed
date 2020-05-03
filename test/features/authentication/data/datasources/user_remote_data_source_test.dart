@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:caramelseed/core/authorization/token_manager.dart';
+import 'package:caramelseed/core/managers/token_manager.dart';
 import 'package:caramelseed/core/config/env_config.dart';
 import 'package:caramelseed/core/error/exceptions.dart';
 import 'package:caramelseed/features/authentication/data/datasources/user_remote_data_source.dart';
@@ -82,7 +82,8 @@ void main() {
           },
           body: jsonEncode(userMap),
         ));
-      }, skip: true
+      },
+      skip: true,
     );
 
     test(
@@ -94,7 +95,8 @@ void main() {
         final result = await dataSource.login(email: email, password: password);
         // assert
         expect(result, equals(userModel));
-      }, skip: true
+      },
+      skip: true,
     );
 
     test(
@@ -106,7 +108,8 @@ void main() {
         final call = dataSource.login;
         // assert
         expect(() => call(email: email, password: password), throwsA(const TypeMatcher<ServerException>()));
-      }, skip: true
+      },
+      skip: true,
     );
 
     test(
@@ -118,7 +121,8 @@ void main() {
         final call = dataSource.login;
         // assert
         expect(() => call(email: email, password: password), throwsA(const TypeMatcher<ServerException>()));
-      }, skip: true
+      },
+      skip: true,
     );
   });
 }

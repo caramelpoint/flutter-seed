@@ -1,11 +1,12 @@
 import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:caramelseed/core/error/failures.dart';
-import 'package:caramelseed/features/authentication/domain/entities/user.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/error/failures.dart';
+import '../../domain/entities/user.dart';
 import '../../domain/repositories/user_session_repository.dart';
 import '../model/user_model.dart';
 
@@ -28,22 +29,31 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
   }
 
   @override
-  Future<void> removeUserLogged() async {
-    await sharedPreferences.remove(LOGGED_USER);
-    await sharedPreferences.setBool(IS_LOGGED_IN, false);
+  Future<Either<Failure, void>> removeUserLogged() async {
+    final bool isUserRemoved = await sharedPreferences.remove(LOGGED_USER);
+    if (isUserRemoved) {
+      return Right(null);
+    } else {
+      return Left(CouldNotRemoveUserFailure());
+    }
   }
 
   @override
-  Future<void> saveUserLogged(User user) async {
+  Future<Either<Failure, void>> saveUserLogged(User user) async {
     final UserModel userModel = UserModel(
       email: user.email,
       username: user.username,
       name: user.name,
+      lastname: user.lastname,
       userId: user.id,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     );
-    await sharedPreferences.setString(LOGGED_USER, jsonEncode(userModel.toJson()));
-    await sharedPreferences.setBool(IS_LOGGED_IN, true);
+    final bool isUserSaved = await sharedPreferences.setString(LOGGED_USER, jsonEncode(userModel.toJson()));
+    if (isUserSaved) {
+      return Right(null);
+    } else {
+      return Left(CouldNotSaveUserFailure());
+    }
   }
 }
