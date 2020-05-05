@@ -20,3 +20,7 @@ class CacheFailure extends Failure {}
 class NoConnectionFailure extends Failure {}
 
 class GetAllItemsFailure extends Failure {}
+
+class SaveResponseFailure extends Failure {}
+
+class CreateFormResponseFailure extends Failure {}
