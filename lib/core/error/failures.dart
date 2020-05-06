@@ -7,9 +7,13 @@ abstract class Failure extends Equatable {
 
 class LoginFailure extends Failure {}
 
+class GetIsFirstLoadFailure extends Failure {}
+
 class GetCurrentSessionFailure extends Failure {}
 
 class CouldNotRemoveUserFailure extends Failure {}
+
+class CouldNotSaveIsLoadTimeFailure extends Failure {}
 
 class CouldNotSaveUserFailure extends Failure {}
 

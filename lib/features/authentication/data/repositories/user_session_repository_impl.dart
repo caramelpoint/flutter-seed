@@ -12,6 +12,7 @@ import '../model/user_model.dart';
 
 const LOGGED_USER = 'LOGGED_USER';
 const IS_LOGGED_IN = 'IS_LOGGED_IN';
+const IS_FIRST_LOAD = 'IS_FIRST_LOAD';
 
 class UserSessionRepositoryImpl implements UserSessionRepository {
   final SharedPreferences sharedPreferences;
@@ -54,6 +55,25 @@ class UserSessionRepositoryImpl implements UserSessionRepository {
       return const Right(null);
     } else {
       return Left(CouldNotSaveUserFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> getIsFirstLoad() async {
+    final bool isFirstLoad = sharedPreferences.getBool(IS_FIRST_LOAD);
+    if (isFirstLoad == null) {
+      return Left(GetIsFirstLoadFailure());
+    }
+    return Right(isFirstLoad);
+  }
+
+  @override
+  Future<Either<Failure, void>> saveIsFirstLoad() async {
+    final bool isFirstLoad = await sharedPreferences.setBool(IS_FIRST_LOAD, false);
+    if (isFirstLoad) {
+      return const Right(null);
+    } else {
+      return Left(CouldNotSaveIsLoadTimeFailure());
     }
   }
 }

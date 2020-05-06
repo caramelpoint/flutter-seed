@@ -1,3 +1,4 @@
+import 'package:caramelseed/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,10 @@ class Sidebar extends StatelessWidget {
         SidebarItem(
           icon: Icons.exit_to_app,
           text: 'Logout',
-          onTap: () => BlocProvider.of<UserSessionBloc>(context).add(LoggedOut()),
+          onTap: () {
+            BlocProvider.of<UserSessionBloc>(context).add(LoggedOut());
+            Navigator.of(context).pushReplacementNamed(LOGIN_ROUTE);
+          },
         )
       ],
     ));

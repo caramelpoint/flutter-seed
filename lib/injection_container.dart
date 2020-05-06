@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/config/env_config.dart';
 import 'core/managers/token_manager.dart';
 import 'core/network/network_info.dart';
+import 'core/routing/app_navigation.dart';
 import 'features/authentication/data/datasources/user_remote_data_source.dart';
 import 'features/authentication/data/repositories/auth_repository_impl.dart';
 import 'features/authentication/data/repositories/user_session_repository_impl.dart';
@@ -91,6 +92,10 @@ Future<void> init() async {
     () => TokenManagerImpl(
       sharedPreferences: injector<SharedPreferences>(),
     ),
+  );
+
+  injector.registerLazySingleton<AppNavigation>(
+    () => AppNavigation(),
   );
 
   //! External

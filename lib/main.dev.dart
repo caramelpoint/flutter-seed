@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/bloc/simple_bloc_delegate.dart';
 import 'core/config/app_config.dart';
@@ -10,17 +10,17 @@ import 'main.dart';
 
 bool isFirstLoad = true;
 
-void _getOnboarding() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  isFirstLoad = prefs.getBool("isFirstLoad");
-  if (isFirstLoad == null || isFirstLoad == true) {
-    await prefs.setBool("isFirstLoad", false);
-  }
-}
+// void _getOnboarding() async {
+//   final SharedPreferences prefs = await SharedPreferences.getInstance();
+//   isFirstLoad = prefs.getBool("isFirstLoad");
+//   if (isFirstLoad == null || isFirstLoad == true) {
+//     await prefs.setBool("isFirstLoad", false);
+//   }
+// }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  _getOnboarding();
+  // _getOnboarding();
   await injector_container.init();
   final AppConfig configuredApp = AppConfig(
     envConfig: DevUrlConfig(),

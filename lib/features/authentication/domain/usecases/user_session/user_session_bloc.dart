@@ -28,25 +28,46 @@ class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
       yield* _mapLoggedInToState();
     } else if (event is LoggedOut) {
       yield* _mapLoggedOutToState();
+    } else if (event is Restart) {
+      yield Uninitialized();
+    } else if (event is Onboarded) {
+      yield* _mapOnBoardedToState();
     }
   }
 
+  Stream<UserSessionState> _mapOnBoardedToState() async* {
+    final Either<Failure, void> failureOrSuccess = await userSessionRepository.saveIsFirstLoad();
+    yield failureOrSuccess.fold(
+      (failure) => const ErrorSessionState(msg: CommonMessage.SAVING_IS_FIRST_LOAD_ERROR),
+      (_) => const Unauthenticated(isFirstLoad: false),
+    );
+  }
+
   Stream<UserSessionState> _mapAppStartedToState() async* {
-    try {
-      yield* _getUser();
-    } catch (_) {
-      yield Unauthenticated();
-    }
+    final bool isFirstLoad = await _getIsFirstLoad();
+    final Either<Failure, User> failureOrUser = await userSessionRepository.getUserLogged();
+    yield failureOrUser.fold(
+      (failure) => isFirstLoad ? const Unauthenticated(isFirstLoad: true) : const Unauthenticated(isFirstLoad: false),
+      (user) => Authenticated(user),
+    );
   }
 
   Stream<UserSessionState> _mapLoggedInToState() async* {
     yield* _getUser();
   }
 
+  Future<bool> _getIsFirstLoad() async {
+    final Either<Failure, bool> failureOrIsFirstLoad = await userSessionRepository.getIsFirstLoad();
+    if (failureOrIsFirstLoad.isRight()) {
+      return failureOrIsFirstLoad.getOrElse(null);
+    }
+    return true;
+  }
+
   Stream<UserSessionState> _getUser() async* {
     final Either<Failure, User> failureOrUser = await userSessionRepository.getUserLogged();
     yield failureOrUser.fold(
-      (failure) => Unauthenticated(),
+      (failure) => const Unauthenticated(),
       (user) => Authenticated(user),
     );
   }
@@ -55,7 +76,7 @@ class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
     final Either<Failure, void> failureOrSuccess = await userSessionRepository.removeUserLogged();
     yield failureOrSuccess.fold(
       (failure) => const ErrorSessionState(msg: CommonMessage.CLEARING_USER_SESSION_ERROR),
-      (_) => Unauthenticated(),
+      (_) => const Unauthenticated(),
     );
   }
 }
