@@ -12,7 +12,7 @@ Future<void> main() async {
   await injector.init();
   final AppConfig configuredApp = AppConfig(
     envConfig: LocalUrlConfig(),
-    child: MyApp(),
+    child: const MyApp(),
   );
   BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(configuredApp);

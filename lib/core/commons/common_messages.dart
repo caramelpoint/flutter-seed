@@ -7,5 +7,6 @@ class CommonMessage {
   static const String GETTING_ITEMS = 'Cargando items!';
   static const String SAVING_USER_SESSION = 'Guardando sesion de usuario!';
   static const String SAVING_USER_SESSION_ERROR = 'Ocurrio un error al guardar el usuario!';
+  static const String SAVING_IS_FIRST_LOAD_ERROR = 'Ocurrio un error al registrar el primer inicio de la aplicación!';
   static const String CLEARING_USER_SESSION_ERROR = 'Ocurrio un error al quitar el usuario!';
 }

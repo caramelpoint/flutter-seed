@@ -1,26 +1,31 @@
+import 'package:caramelseed/core/routing/app_navigation.dart';
+import 'package:caramelseed/core/widgets/spinner.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:page_transition/page_transition.dart';
 
+import 'core/routing/routes.dart';
 import 'core/theme/main_theme.dart';
 import 'core/widgets/splash_screen.dart';
 import 'features/authentication/domain/usecases/user_session/bloc.dart';
-import 'features/authentication/presentation/pages/login_page.dart';
-import 'features/item_list/presentation/pages/item_list_page.dart';
 import 'injection_container.dart';
 
 class MyApp extends StatelessWidget {
+  final bool isFirstLoad;
+  const MyApp({this.isFirstLoad});
   @override
   Widget build(BuildContext context) {
     return BlocProvider<UserSessionBloc>(
       create: (_) => injector<UserSessionBloc>()..add(AppStarted()),
-      child: const App(),
+      child: App(isFirstLoad: isFirstLoad),
     );
   }
 }
 
 class App extends StatelessWidget {
-  const App({Key key}) : super(key: key);
+  final bool isFirstLoad;
+
+  const App({Key key, this.isFirstLoad}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,63 +45,79 @@ class App extends StatelessWidget {
           child: child,
         );
       },
-      home: getAuthenticationBlocBuilder(
-        unauthenticatedChild: const LoginPage(),
-        authenticatedChild: const ItemListPage(),
-        loader: SplashScreen(),
-      ),
-      onGenerateRoute: getRoutes,
+      // home: MainPage(),
+      // home: getAuthenticationBlocBuilder(),
+      onGenerateRoute: injector<AppNavigation>().generateRoute,
+      initialRoute: ROOT_ROUTE,
+      // initialRoute: isFirstLoad == true || isFirstLoad == null ? "/onBoarding" : "/onBoarding",
     );
   }
 
-  Widget getAuthenticationBlocBuilder({Widget authenticatedChild, Widget unauthenticatedChild, Widget loader}) {
-    return BlocBuilder<UserSessionBloc, UserSessionState>(
-      builder: (BuildContext context, UserSessionState state) {
+  // Widget getAuthenticationBlocBuilder() {
+  //   return BlocBuilder<UserSessionBloc, UserSessionState>(
+  //     builder: (BuildContext context, UserSessionState state) {
+  //       // if (state is Unauthenticated) {
+  //       //   Navigator.of(context).pushReplacementNamed("/login");
+  //       // }
+  //       // if (state is Authenticated) {
+  //       //   Navigator.of(context).pushReplacementNamed("/list");
+  //       // }
+  //       // return Container();
+  //       return SplashScreen();
+  //     },
+  //   );
+  // }
+}
+
+class MainPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return
+        // BlocProvider<UserSessionBloc>(
+        //   create: (BuildContext context) => injector<UserSessionBloc>(),
+        //   child:
+        BlocListener<UserSessionBloc, UserSessionState>(
+      listener: (BuildContext context, UserSessionState state) {
+        // BlocBuilder<UserSessionBloc, UserSessionState>(
+        //   builder: (BuildContext context, UserSessionState state) {
         if (state is Unauthenticated) {
-          return unauthenticatedChild;
+          if (state.isFirstLoad) {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).pushReplacementNamed(ONBOARDING_ROUTE);
+            });
+          } else {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              // Navigator.of(context).push(...);
+              // Navigator.of(context).pushNamed("/login");
+              Navigator.of(context).pushReplacementNamed(LOGIN_ROUTE);
+            });
+          }
         }
         if (state is Authenticated) {
-          return authenticatedChild;
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            // Navigator.of(context).push(...);
+            Navigator.of(context).pushReplacementNamed(LIST_ROUTE);
+          });
         }
-        return loader;
+        if (state is Uninitialized) {
+          print("Loading");
+        }
+        // return SplashScreen();
+        // return Container(child: Text("Holas"));
       },
-    );
-  }
-
-  Route<dynamic> getRoutes(RouteSettings settings) {
-    switch (settings.name) {
-      case '/login':
-        return getTransition(
-          settings,
-          getAuthenticationBlocBuilder(
-            unauthenticatedChild: const LoginPage(),
-            authenticatedChild: const ItemListPage(),
-            loader: SplashScreen(),
+      child: Container(
+        child: Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
+          body:
+              // Center(child: Text("hola")
+              Container(
+            margin: EdgeInsets.all(600),
+            child: Spinner(),
           ),
-        );
-        break;
-      case '/home':
-        return getTransition(
-          settings,
-          getAuthenticationBlocBuilder(
-            unauthenticatedChild: const LoginPage(),
-            authenticatedChild: const ItemListPage(),
-            loader: SplashScreen(),
-          ),
-        );
-        break;
-      default:
-        return null;
-    }
-  }
-
-  // TODO move to absctract class util
-  PageTransition<dynamic> getTransition(RouteSettings settings, Widget child) {
-    return PageTransition<dynamic>(
-      child: child,
-      type: PageTransitionType.rightToLeftWithFade,
-      duration: const Duration(milliseconds: 325),
-      settings: settings,
+        ),
+      ), //Loading
+      // ),
     );
+    // );
   }
 }

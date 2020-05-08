@@ -26,7 +26,19 @@ class Authenticated extends UserSessionState {
 
 class Uninitialized extends UserSessionState {}
 
-class Unauthenticated extends UserSessionState {}
+class Unauthenticated extends UserSessionState {
+  const Unauthenticated({this.isFirstLoad = false});
+
+  final bool isFirstLoad;
+
+  @override
+  List<Object> get props => <bool>[isFirstLoad];
+
+  @override
+  String toString() {
+    return 'Authenticated { isFirstLoad: $isFirstLoad }';
+  }
+}
 
 class ErrorSessionState extends UserSessionState implements ErrorState {
   final String msg;

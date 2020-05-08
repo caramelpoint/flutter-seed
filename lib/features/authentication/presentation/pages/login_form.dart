@@ -1,3 +1,4 @@
+import 'package:caramelseed/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -152,6 +153,7 @@ class _LoginFormState extends State<LoginForm> {
           password: _passwordController.text,
         ),
       );
+      Navigator.of(context).pushNamed(LIST_ROUTE);
     } else {
       _loginBloc.add(
         LoginInvalidValues(

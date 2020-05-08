@@ -9,4 +9,8 @@ abstract class UserSessionRepository {
   Future<Either<Failure, User>> getUserLogged();
 
   Future<Either<Failure, void>> removeUserLogged();
+
+  Future<Either<Failure, void>> saveIsFirstLoad();
+
+  Future<Either<Failure, bool>> getIsFirstLoad();
 }

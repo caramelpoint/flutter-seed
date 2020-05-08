@@ -10,3 +10,7 @@ class AppStarted extends UserSessionEvent {}
 class LoggedIn extends UserSessionEvent {}
 
 class LoggedOut extends UserSessionEvent {}
+
+class Restart extends UserSessionEvent {}
+
+class Onboarded extends UserSessionEvent {}
