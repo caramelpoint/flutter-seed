@@ -53,7 +53,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final theme = Theme.of(context);s
     SizeConfig.init(context);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,

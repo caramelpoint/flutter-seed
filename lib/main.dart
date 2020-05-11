@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/routing/routes.dart';
 import 'core/theme/main_theme.dart';
-import 'core/widgets/splash_screen.dart';
 import 'features/authentication/domain/usecases/user_session/bloc.dart';
 import 'injection_container.dart';
 
@@ -45,41 +44,17 @@ class App extends StatelessWidget {
           child: child,
         );
       },
-      // home: MainPage(),
-      // home: getAuthenticationBlocBuilder(),
       onGenerateRoute: injector<AppNavigation>().generateRoute,
       initialRoute: ROOT_ROUTE,
-      // initialRoute: isFirstLoad == true || isFirstLoad == null ? "/onBoarding" : "/onBoarding",
     );
   }
-
-  // Widget getAuthenticationBlocBuilder() {
-  //   return BlocBuilder<UserSessionBloc, UserSessionState>(
-  //     builder: (BuildContext context, UserSessionState state) {
-  //       // if (state is Unauthenticated) {
-  //       //   Navigator.of(context).pushReplacementNamed("/login");
-  //       // }
-  //       // if (state is Authenticated) {
-  //       //   Navigator.of(context).pushReplacementNamed("/list");
-  //       // }
-  //       // return Container();
-  //       return SplashScreen();
-  //     },
-  //   );
-  // }
 }
 
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return
-        // BlocProvider<UserSessionBloc>(
-        //   create: (BuildContext context) => injector<UserSessionBloc>(),
-        //   child:
-        BlocListener<UserSessionBloc, UserSessionState>(
+    return BlocListener<UserSessionBloc, UserSessionState>(
       listener: (BuildContext context, UserSessionState state) {
-        // BlocBuilder<UserSessionBloc, UserSessionState>(
-        //   builder: (BuildContext context, UserSessionState state) {
         if (state is Unauthenticated) {
           if (state.isFirstLoad) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -87,37 +62,23 @@ class MainPage extends StatelessWidget {
             });
           } else {
             SchedulerBinding.instance.addPostFrameCallback((_) {
-              // Navigator.of(context).push(...);
-              // Navigator.of(context).pushNamed("/login");
               Navigator.of(context).pushReplacementNamed(LOGIN_ROUTE);
             });
           }
         }
         if (state is Authenticated) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
-            // Navigator.of(context).push(...);
             Navigator.of(context).pushReplacementNamed(LIST_ROUTE);
           });
         }
-        if (state is Uninitialized) {
-          print("Loading");
-        }
-        // return SplashScreen();
-        // return Container(child: Text("Holas"));
       },
-      child: Container(
-        child: Scaffold(
-          backgroundColor: Theme.of(context).backgroundColor,
-          body:
-              // Center(child: Text("hola")
-              Container(
-            margin: EdgeInsets.all(600),
-            child: Spinner(),
-          ),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: Container(
+          margin: const EdgeInsets.all(600),
+          child: const Spinner(),
         ),
-      ), //Loading
-      // ),
+      ),
     );
-    // );
   }
 }

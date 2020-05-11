@@ -72,7 +72,7 @@ void main() {
         },
         act: (bloc) => bloc.add(AppStarted()) as Future<void>,
         skip: 0,
-        expect: [Uninitialized(), Unauthenticated()],
+        expect: [Uninitialized(), const Unauthenticated()],
       );
     },
   );
@@ -110,7 +110,7 @@ void main() {
         },
         act: (bloc) => bloc.add(LoggedIn()) as Future<void>,
         skip: 0,
-        expect: [Uninitialized(), Unauthenticated()],
+        expect: [Uninitialized(), const Unauthenticated()],
       );
     },
   );
@@ -152,7 +152,7 @@ void main() {
         skip: 0,
         expect: [
           Uninitialized(),
-          Unauthenticated(),
+          const Unauthenticated(),
         ],
       );
       blocTest(

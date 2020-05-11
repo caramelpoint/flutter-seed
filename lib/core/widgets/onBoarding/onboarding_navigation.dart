@@ -36,7 +36,6 @@ class OnBoardingNavigation extends StatelessWidget {
                   Icons.arrow_forward,
                   color: Colors.black,
                   size: SizeConfig.blockSizeHorizontal * 7,
-                  // size: 30.0,
                 ),
               ],
             ),
