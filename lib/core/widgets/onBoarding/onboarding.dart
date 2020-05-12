@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:caramelseed/core/config/size_config.dart';
+import 'package:caramelseed/core/routing/router.gr.dart';
 import 'package:caramelseed/features/authentication/domain/usecases/user_session/user_session_bloc.dart';
 import 'package:caramelseed/features/authentication/domain/usecases/user_session/user_session_event.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +50,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   void _skipOnBoarding(BuildContext context) {
     print("Skip OnBoarding");
     BlocProvider.of<UserSessionBloc>(context).add(Onboarded());
-    Navigator.of(context).pushNamed("/login");
+    ExtendedNavigator.ofRouter<Router>().pushReplacementNamed(Routes.loginPageRoute);
   }
 
   @override

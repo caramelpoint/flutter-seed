@@ -1,10 +1,10 @@
-import 'package:caramelseed/core/routing/app_navigation.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:caramelseed/core/widgets/spinner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/routing/routes.dart';
+import 'core/routing/router.gr.dart';
 import 'core/theme/main_theme.dart';
 import 'features/authentication/domain/usecases/user_session/bloc.dart';
 import 'injection_container.dart';
@@ -41,11 +41,9 @@ class App extends StatelessWidget {
           data: data.copyWith(
             textScaleFactor: data.textScaleFactor * (!useMobileLayout ? 1.5 : useSmallMobileLayout ? 0.8 : 1),
           ),
-          child: child,
+          child: ExtendedNavigator<Router>(router: Router()),
         );
       },
-      onGenerateRoute: injector<AppNavigation>().generateRoute,
-      initialRoute: ROOT_ROUTE,
     );
   }
 }
@@ -58,17 +56,17 @@ class MainPage extends StatelessWidget {
         if (state is Unauthenticated) {
           if (state.isFirstLoad) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
-              Navigator.of(context).pushReplacementNamed(ONBOARDING_ROUTE);
+              ExtendedNavigator.ofRouter<Router>().pushReplacementNamed(Routes.onboardingPageRoute);
             });
           } else {
             SchedulerBinding.instance.addPostFrameCallback((_) {
-              Navigator.of(context).pushReplacementNamed(LOGIN_ROUTE);
+              ExtendedNavigator.ofRouter<Router>().pushReplacementNamed(Routes.loginPageRoute);
             });
           }
         }
         if (state is Authenticated) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
-            Navigator.of(context).pushReplacementNamed(LIST_ROUTE);
+            ExtendedNavigator.ofRouter<Router>().pushReplacementNamed(Routes.itemListPageRoute);
           });
         }
       },
