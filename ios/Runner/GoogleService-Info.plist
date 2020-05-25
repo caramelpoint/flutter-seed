@@ -3,34 +3,36 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>760906523993-ldjfr0c4c3dv5ua2p344ikli8pik6dp6.apps.googleusercontent.com</string>
+	<string>10319784833-p4rf0p1vtb1s6n6fm7j14323ltof27ss.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.760906523993-ldjfr0c4c3dv5ua2p344ikli8pik6dp6</string>
+	<string>com.googleusercontent.apps.10319784833-p4rf0p1vtb1s6n6fm7j14323ltof27ss</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>10319784833-v2kgoe9m6dbeus4q1f4pc6odeer45l58.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAqPmoQycWPKclEUjMtUe5NY8iT4uu39OA</string>
+	<string>AIzaSyCuW7CychstDTfm5_EO9aSItAgkgRAxXsU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>760906523993</string>
+	<string>10319784833</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.caramel.seed</string>
 	<key>PROJECT_ID</key>
-	<string>caramelseed</string>
+	<string>fseed-317fd</string>
 	<key>STORAGE_BUCKET</key>
-	<string>caramelseed.appspot.com</string>
+	<string>fseed-317fd.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:760906523993:ios:752c103eb3a1d6efb05848</string>
+	<string>1:10319784833:ios:3f0ad4833c0146df04d680</string>
 	<key>DATABASE_URL</key>
-	<string>https://caramelseed.firebaseio.com</string>
+	<string>https://fseed-317fd.firebaseio.com</string>
 </dict>
 </plist>
