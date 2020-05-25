@@ -1,42 +1,43 @@
 {
   "project_info": {
-    "project_number": "760906523993",
-    "firebase_url": "https://caramelseed.firebaseio.com",
-    "project_id": "caramelseed",
-    "storage_bucket": "caramelseed.appspot.com"
+    "project_number": "10319784833",
+    "firebase_url": "https://fseed-317fd.firebaseio.com",
+    "project_id": "fseed-317fd",
+    "storage_bucket": "fseed-317fd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:760906523993:android:fb36b4c413e2fa7ab05848",
+        "mobilesdk_app_id": "1:10319784833:android:cf7cced4cd450a4a04d680",
         "android_client_info": {
           "package_name": "com.caramel.seed"
         }
       },
       "oauth_client": [
         {
-          "client_id": "760906523993-qt9mf4do2dgdts7ib0nl75t9janeqjbo.apps.googleusercontent.com",
+          "client_id": "10319784833-v2kgoe9m6dbeus4q1f4pc6odeer45l58.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caramel.seed",
+            "certificate_hash": "ba4dc79c291d28e631047a9918641658e5906c64"
+          }
+        },
+        {
+          "client_id": "10319784833-1dgq8nr2h9hqs57e2q7mi2otamcnmaf6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAJEl7MJKGdWCz8l1fVrlODsclbJqTHbWA"
+          "current_key": "AIzaSyCCoG39MoJFrc4Ed03QiDipD58YjP6_-4Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "760906523993-qt9mf4do2dgdts7ib0nl75t9janeqjbo.apps.googleusercontent.com",
+              "client_id": "10319784833-1dgq8nr2h9hqs57e2q7mi2otamcnmaf6.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "760906523993-ldjfr0c4c3dv5ua2p344ikli8pik6dp6.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.caramel.seed"
-              }
             }
           ]
         }

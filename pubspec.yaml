@@ -22,6 +22,9 @@ dependencies:
   flutter_spinkit: '^4.1.2'
   path_provider: ^1.6.5
   flutter_data: ^0.3.11
+  firebase_auth: ^0.16.0
+  google_sign_in: ^4.5.1
+  flutter_auth_buttons: ^0.8.0
 
 dev_dependencies:
   flutter_driver:

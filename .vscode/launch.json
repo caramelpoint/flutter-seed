@@ -15,13 +15,28 @@
       "name": "Flutter-Dev",
       "request": "launch",
       "type": "dart",
-      "args": ["-t", "lib/main.dev.dart"]
+      "args": [
+        "-t",
+        "lib/main.dev.dart"
+      ]
     },
     {
       "name": "Flutter-Local",
       "request": "launch",
       "type": "dart",
-      "args": ["-t", "lib/main.local.dart"]
+      "args": [
+        "-t",
+        "lib/main.local.dart"
+      ]
+    },
+    {
+      "name": "Flutter-FB",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "-t",
+        "lib/mainAuth.dart"
+      ]
     }
   ]
 }
