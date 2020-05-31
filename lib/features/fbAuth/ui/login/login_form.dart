@@ -4,8 +4,10 @@ import 'package:caramelseed/features/fbAuth/repository/user_repository.dart';
 import 'package:caramelseed/features/fbAuth/ui/login/create_account_button.dart';
 import 'package:caramelseed/features/fbAuth/ui/login/google_login_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'facebook_login_button.dart';
 import 'login_button.dart';
 
 class LoginForm extends StatefulWidget {
@@ -118,6 +120,8 @@ class _LoginFormState extends State<LoginForm> {
                       ),
                       // GoogleLoginButton
                       GoogleLoginButton(),
+                      // FaceboookLoginButton
+                      FacebookLoginButton(),
                       // CreateAccountButton
                       CreateAccountButton(
                         userRepository: _userRepository,

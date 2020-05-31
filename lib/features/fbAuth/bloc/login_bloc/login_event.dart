@@ -52,18 +52,19 @@ class Submitted extends LoginEvent {
 // LoginWithGooglePressed - login con google
 class LoginWithGooglePressed extends LoginEvent {}
 
+// LoginWithFacebookPressed - login con facebook
+class LoginWithFacebookPressed extends LoginEvent {}
+
 // LoginWithCredentialsPressed - login con credenciales
 class LoginWithCredentialsPressed extends LoginEvent {
   final String email;
   final String password;
 
-  const LoginWithCredentialsPressed(
-      {@required this.email, @required this.password});
+  const LoginWithCredentialsPressed({@required this.email, @required this.password});
 
   @override
   List<Object> get props => [email, password];
 
   @override
-  String toString() =>
-      'LoginWithCredentials {email: $email, password: $password}';
+  String toString() => 'LoginWithCredentials {email: $email, password: $password}';
 }

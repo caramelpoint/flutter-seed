@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:caramelseed/features/fbAuth/repository/user_repository.dart';
 import 'package:caramelseed/features/fbAuth/util/validators.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -47,6 +48,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoginWithGooglePressed) {
       yield* _mapLoginWithGooglePressedToState();
     }
+    if (event is LoginWithFacebookPressed) {
+      yield* _mapLoginWithFacebookPressedToState();
+    }
     if (event is LoginWithCredentialsPressed) {
       yield* _mapLoginWithCredentialsPressedToState(email: event.email, password: event.password);
     }
@@ -69,11 +73,28 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
+  Stream<LoginState> _mapLoginWithFacebookPressedToState() async* {
+    try {
+      FirebaseUser firebaseUser = await _userRepository.signInWithFacebook();
+      if (firebaseUser != null) {
+        yield LoginState.success();
+      } else {
+        throw Exception();
+      }
+    } catch (_) {
+      yield LoginState.failure();
+    }
+  }
+
   Stream<LoginState> _mapLoginWithCredentialsPressedToState({String email, String password}) async* {
     yield LoginState.loading();
     try {
-      await _userRepository.signInWithCredentials(email, password);
+      final String uid = await _userRepository.signInWithCredentials(email, password);
+      if (uid != null){
       yield LoginState.success();
+      } else {
+        throw Exception();
+      }
     } catch (_) {
       yield LoginState.failure();
     }
