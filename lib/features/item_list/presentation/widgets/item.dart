@@ -17,7 +17,7 @@ class ItemWidget extends StatelessWidget {
         isThreeLine: false,
         title: Text(
           itemToShow.name,
-          style: Theme.of(context).textTheme.subtitle.copyWith(color: Theme.of(context).primaryColor),
+          style: Theme.of(context).textTheme.subtitle2.copyWith(color: Theme.of(context).primaryColor),
         ),
         trailing: IconButton(
           icon: const Icon(Icons.chevron_right),
@@ -27,7 +27,7 @@ class ItemWidget extends StatelessWidget {
         ),
         subtitle: Text(
           itemToShow.description,
-          style: Theme.of(context).textTheme.body2,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
       ),
     );

@@ -43,7 +43,7 @@ class ItemList extends StatelessWidget {
                     children: <Widget>[
                       Padding(
                           padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Text("Items", style: Theme.of(context).textTheme.title)),
+                          child: Text("Items", style: Theme.of(context).textTheme.headline6)),
                       Expanded(
                         child: ListView.builder(
                             itemCount: state.items.length,

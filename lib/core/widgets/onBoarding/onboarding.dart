@@ -70,14 +70,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   _currentPage = page;
                 });
               },
-              children: <Widget>[
-                const Center(
+              children: const <Widget>[
+                Center(
                   child: Text("Page 1"),
                 ),
-                const Center(
+                Center(
                   child: Text("Page 2"),
                 ),
-                const Center(
+                Center(
                   child: Text("Page 3"),
                 ),
               ],

@@ -61,9 +61,9 @@ class MainTheme {
         brightness: Brightness.light,
       ),
       fontFamily: 'Roboto',
-      textTheme: const TextTheme(
+      textTheme: TextTheme(
         // H1
-        display1: TextStyle(
+        headline4: TextStyle(
           fontSize: 34,
           letterSpacing: -1.5,
           fontStyle: FontStyle.normal,
@@ -71,7 +71,7 @@ class MainTheme {
           fontWeight: FontWeight.w900, // Black
         ),
         // H2
-        display2: TextStyle(
+        headline3: TextStyle(
           fontSize: 28,
           letterSpacing: -0.5,
           fontStyle: FontStyle.normal,
@@ -79,7 +79,7 @@ class MainTheme {
           fontWeight: FontWeight.normal, // Medium
         ),
         // H3
-        display3: TextStyle(
+        headline2: TextStyle(
           fontSize: 32,
           letterSpacing: -0.04,
           fontStyle: FontStyle.normal,
@@ -87,7 +87,7 @@ class MainTheme {
           fontWeight: FontWeight.w900, // Black
         ),
         // H4
-        display4: TextStyle(
+        headline1: TextStyle(
           fontSize: 16,
           letterSpacing: 0.25,
           fontStyle: FontStyle.normal,
@@ -95,7 +95,7 @@ class MainTheme {
           fontWeight: FontWeight.normal, // Black
         ),
         // Title
-        title: TextStyle(
+        headline6: TextStyle(
           fontSize: 22,
           letterSpacing: 0,
           fontStyle: FontStyle.normal,
@@ -103,7 +103,7 @@ class MainTheme {
           fontWeight: FontWeight.w700, // Bold
         ),
         // Subtitle
-        subtitle: TextStyle(
+        subtitle2: TextStyle(
           fontSize: 20,
           letterSpacing: 0.25,
           fontStyle: FontStyle.normal,
@@ -111,7 +111,7 @@ class MainTheme {
           fontWeight: FontWeight.w600, // Bold
         ),
         // Headline
-        headline: TextStyle(
+        headline5: TextStyle(
           fontSize: 18,
           // letterSpacing: 0.15,
           fontStyle: FontStyle.normal,
@@ -119,14 +119,14 @@ class MainTheme {
           fontWeight: FontWeight.normal, // Normal
         ),
         // Subtitle 2
-        subhead: TextStyle(
+        subtitle1: TextStyle(
           fontSize: 14,
           letterSpacing: 0.1,
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.w500, // Medium
         ),
         // Body1
-        body1: TextStyle(
+        bodyText2: TextStyle(
           fontSize: 16,
           letterSpacing: 0.5,
           fontStyle: FontStyle.normal,
@@ -134,7 +134,7 @@ class MainTheme {
           fontWeight: FontWeight.normal, // Regular
         ),
         // Body2
-        body2: TextStyle(
+        bodyText1: TextStyle(
           fontSize: 13,
           // letterSpacing: 0.25,
           fontStyle: FontStyle.normal,

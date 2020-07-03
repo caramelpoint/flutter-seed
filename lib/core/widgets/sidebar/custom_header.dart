@@ -35,7 +35,7 @@ class UserInfoHeader extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(state.user.getUserFullName(), style: theme.textTheme.body1),
+                        Text(state.user.getUserFullName(), style: theme.textTheme.bodyText2),
                         Text(
                           state.user.email,
                           style: theme.textTheme.overline.copyWith(color: theme.colorScheme.secondaryVariant),

@@ -31,7 +31,7 @@ class SidebarItem extends StatelessWidget {
               padding: EdgeInsets.only(left: SizeConfig.safeBlockVertical * 1),
               child: Text(
                 text,
-                style: theme.textTheme.body1,
+                style: theme.textTheme.bodyText2,
               ),
             )
           ],

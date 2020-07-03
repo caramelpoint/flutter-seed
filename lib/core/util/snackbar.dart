@@ -68,20 +68,20 @@ mixin SnackbarUtil {
     if (type == SUCCESS) {
       return Text(
         text,
-        style: Theme.of(context).textTheme.body1,
+        style: Theme.of(context).textTheme.bodyText2,
       );
     }
     if (type == ERROR) {
       return Text(
         text,
-        style: Theme.of(context).textTheme.body1.copyWith(
+        style: Theme.of(context).textTheme.bodyText2.copyWith(
               color: Theme.of(context).colorScheme.secondary,
             ),
       );
     }
     return Text(
       text,
-      style: Theme.of(context).textTheme.headline,
+      style: Theme.of(context).textTheme.headline5,
     );
   }
 }
