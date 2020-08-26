@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/commons/common_state.dart';
+import '../../entities/user.dart';
 
 class LoginState extends Equatable implements CommonState {
   const LoginState({
